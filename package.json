@@ -1,20 +1,44 @@
 {
-  "name": "challenge",
+  "name": "automation",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto de automação Cypress com Cucumber para desafio técnico",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "cypress run && marge cypress/reports/.jsons/mochawesome.json -f report -o cypress/reports"
   },
-  "keywords": [],
+  "keywords": [
+    "cypress",
+    "cucumber",
+    "gherkin",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "cypress": "^13.6.4",
-    "cypress-cucumber-preprocessor": "^4.3.1"
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "cypress": "^13.10.0",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "esbuild": "^0.21.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "multiple-cucumber-html-reporter": "^3.10.0"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true,
-    "stepDefinitions": "cypress/e2e/step_definitions"
+    "stepDefinitions": [
+      "cypress/e2e/step_definitions/**/*.{js,ts}",
+      "cypress/e2e/step_definitions/[filepath].{js,ts}",
+      "cypress/e2e/step_definitions/[filepath]/**/*.{js,ts}"
+    ],
+    "json": {
+      "enabled": true,
+      "output": "cypress/cucumber-json/bundle.json"
+    }
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
   }
 }

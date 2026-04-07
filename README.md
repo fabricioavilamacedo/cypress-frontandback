@@ -1,15 +1,14 @@
-# ABInBev - Challenge
+# Challenge
 ## Description
-Technical challenge carried out for ABInBev using Cypress.
+Technical challenge using Cypress.
 ## Instructions
 1. Download and install Node in its latest version: [https://nodejs.org/];
-2. Clone the repository: `git@github.com:fabricioavilamacedo/challenge-abinbev.git` (SSH) or `https://github.com/fabricioavilamacedo/challenge-abinbev.git` (HTTPS);
+2. Clone the repository: `` (SSH) or `` (HTTPS);
 3. In the root directory of the project, run the commands `npm install` and `npx cypress open` to open the framework;
-4. After Cypress has started, select and run the test 'login.feature' or 'loginApi.feature' and it will execute all the respective test cases;
+4. After Cypress has started, select and run the test '' or '' and it will execute all the respective test cases;
 5. After any push within the repository, the pipeline routines will start automatically according to the settings in the 'cy.yml' file.
 
 ## Notes
-- If the web test is started before the api test and gives an error, please start the api test to generate the data mass;
 - The tests without the use of cucumber (login.api.cy.js and login.web.cy.js) have been maintained, to perform the executions without the use of the cucumber plugin, you must comment out the configuration of "specPattern: "cypress/e2e/step_definitions/*.feature" in the config.js file, and the script "cypress-cucumber-preprocessor" in the 'package.json file.
 
 ## Directory structure

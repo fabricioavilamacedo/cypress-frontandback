@@ -1,24 +1,42 @@
+# .github/workflows/main.yml
 name: End-to-end tests
+
+# TRIGGER: Shift Left Strategy
+# Executa a cada push para garantir feedback rápido e evitar regressões no código.
 on: [push]
+
 jobs:
   cypress-run:
+    # AMBIENTE: Execução em container Linux isolado para garantir consistência.
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+
+      # PERFORMANCE & CACHE: 
+      # A action oficial gerencia automaticamente o cache do node_modules e do binário do Cypress,
+      # reduzindo o tempo de execução e otimizando custos de infraestrutura no GitHub.
       - name: Cypress run
         uses: cypress-io/github-action@v6
-      - uses: actions/upload-artifact@v4
-        # add the line below to store screenshots only on failures
+        with:
+          browser: chrome
+
+      # OBSERVABILIDADE: 
+      # Em caso de falha, artefatos são gerados para permitir o debug offline sem necessidade
+      # de reprodução local, agilizando o ciclo de correção.
+      - name: Upload Screenshots (Failures only)
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
-      - uses: actions/upload-artifact@v4
+          if-no-files-found: ignore
+
+      # REPORTING:
+      # Upload dos relatórios do Cucumber/Mochawesome para visibilidade dos resultados pelos stakeholders.
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        if: always() # Garante o relatório independente do status do teste.
         with:
-          name: cypress-videos
-          path: cypress/videos
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          name: cypress-reports
+          path: cypress/reports
