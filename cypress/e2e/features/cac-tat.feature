@@ -1,5 +1,5 @@
 Feature: Central de Atendimento ao Cliente TAT
-    Como um usuário do sistema
+    Como um usuário da platafoma CAC TAT
     Quero enviar um feedback através do formulário
     Para que eu possa receber atendimento especializado
 
@@ -25,3 +25,5 @@ Feature: Central de Atendimento ao Cliente TAT
     Scenario: Campo telefone continua vazio ao digitar caracteres não numéricos
         When digito "abc!@#" no campo de telefone
         Then o campo de telefone deve estar vazio
+
+

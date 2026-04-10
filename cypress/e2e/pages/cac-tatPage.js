@@ -1,4 +1,4 @@
-// cypress/e2e/pages/cac-tat.js
+
 import { ELEMENTS } from '../../support/elements/elements'
 
 class CacTatPage {
@@ -12,7 +12,6 @@ class CacTatPage {
         cy.get(ELEMENTS.lastName).should('be.visible').type(dados.sobrenome);
         cy.get(ELEMENTS.email).should('be.visible').type(dados.email);
         
-        // Agora com o seletor assertivo #open-text-area
         cy.get(ELEMENTS.openText)
             .should('be.visible')
             .type(dados.feedback, { delay: 0 });
